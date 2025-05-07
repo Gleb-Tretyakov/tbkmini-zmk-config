@@ -10,121 +10,172 @@
 #include <dt-bindings/zmk/outputs.h>
 #include <dt-bindings/zmk/mouse.h>
 
-// Layer definitions
-#define BASE 0
-#define LOWER 1
-#define RAISE 2
-#define POINTER 3
+// Определяем tapping-term на основе вашего QMK конфига
+#define MY_TAPPING_TERM 200
+#define MY_QUICK_TAP_MS 125 // Можно подстроить для поведения, похожего на RETRO_TAPPING
 
-// Mouse configuration
-&mmv {
-    time-to-max-speed-ms = <500>;
-    acceleration-exponent = <1>;
-};
+// ----- Слои -----
+#define BASE   0
+#define NAV    1
+#define NUM    2
+#define MOUSE  3 // Слой для управления указателем
 
-&msc {
-    time-to-max-speed-ms = <500>;
-    acceleration-exponent = <1>;
-};
+// ----- Псевдонимы для клавиш (для удобства) -----
+// Модификаторы
+#define LCTRL LCTL
+#define RCTRL RCTL
+#define LSHFT LFT_SHF
+#define RSHFT RGT_SHF
+#define LALT  LALT
+#define RALT  RALT
+#define LGUI  LGUI
+#define RGUI  RGUI
 
-/ {
-    sensors {
-        compatible = "zmk,keymap-sensors";
-        sensors = <&trackball>;
-    };
-    
-    trackball: trackball {
-        compatible = "zmk,trackball-pim447";
-        dpi = <1200>;
-        // Equivalent to CHARYBDIS_DRAGSCROLL_REVERSE_X
-        invert-x;
-    };
-};
+// Навигация
+#define KC_ENT  ENTER
+#define KC_ESC  ESCAPE
+#define KC_BSPC BACKSPACE
+#define KC_DEL  DELETE
+#define KC_SPC  SPACE
+#define KC_TAB  TAB
+#define KC_UP   UP
+#define KC_DOWN DOWN
+#define KC_LEFT LEFT
+#define KC_RGHT RIGHT
+#define KC_PGUP PG_UP
+#define KC_PGDN PG_DN
+#define KC_HOME HOME
+#define KC_END  END
+#define KC_INS  INSERT
+#define KC_PSCR PRINTSCREEN
 
+// Мышь
+#define MS_U    MS_UP
+#define MS_D    MS_DOWN
+#define MS_L    MS_LEFT
+#define MS_R    MS_RIGHT
+#define M_WH_U  MW_UP
+#define M_WH_D  MW_DOWN
+#define M_WH_L  MW_LEFT
+#define M_WH_R  MW_RIGHT
+#define M_BTN1  MB1
+#define M_BTN2  MB2
+#define M_BTN3  MB3
+
+
+// ----- Поведения (Behaviors) -----
 / {
     behaviors {
-        // Layer-Tap configuration - equivalent to TAPPING_TERM and RETRO_TAPPING
-        lt: layer_tap {
+        // Mod-Tap: Нажатие = одна клавиша, Удержание = другая (модификатор)
+        // Пример: LSH_T(A) -> Нажатие = A, Удержание = Left Shift
+        // Замените ZMK_BEHAVIOR_OPAQUE на имя вашего поведения, если нужно
+        // например, &lt_lctl_esc для &lt LG(ESC) ESC >
+        // или &mt_shft_a для &mt LSHIFT A >
+        // tapping-term-ms и quick-tap-ms установлены глобально для них
+
+        // Layer-Tap: Нажатие = одна клавиша, Удержание = переключение на слой
+        lt_nav_tab: layer_tap_NAV_TAB {
             compatible = "zmk,behavior-hold-tap";
-            label = "LAYER_TAP";
-            #binding-cells = <2>;
-            tapping-term-ms = <200>;
-            quick-tap-ms = <200>;     // equivalent to RETRO_TAPPING
+            label = "LT_NAV_TAB";
+            #binding-cells = <0>;
+            tapping-term-ms = <MY_TAPPING_TERM>;
+            quick-tap-ms = <MY_QUICK_TAP_MS>; // для лучшего ощущения при быстром нажатии
+            flavor = "tap-preferred"; // Приоритет нажатию
+            bindings = <&mo NAV>, <&kp TAB>; // Удержание = слой NAV, Нажатие = TAB
+        };
+
+        lt_num_spc: layer_tap_NUM_SPC {
+            compatible = "zmk,behavior-hold-tap";
+            label = "LT_NUM_SPC";
+            #binding-cells = <0>;
+            tapping-term-ms = <MY_TAPPING_TERM>;
+            quick-tap-ms = <MY_QUICK_TAP_MS>;
             flavor = "tap-preferred";
-            bindings = <&mo>, <&kp>;
+            bindings = <&mo NUM>, <&kp SPACE>; // Удержание = слой NUM, Нажатие = SPACE
         };
-        
-        // Mouse scroll behavior
-        msc_reverse_x: msc_reverse_x {
-            compatible = "zmk,behavior-mouse-scroll";
-            label = "MSC_REVERSE_X";
-            #binding-cells = <1>;
-            delay-ms = <0>;
-            time-to-max-speed-ms = <500>; 
-            acceleration-exponent = <1>;
-            invert-x;
-        };
-        
-        // Auto enable pointer layer
-        auto_pointer: auto_pointer {
-            compatible = "zmk,behavior-sensor-rotate";
-            label = "AUTO_POINTER";
-            #sensor-binding-cells = <0>;
-            bindings = <&mo POINTER>;
+
+        // Пример Mod-Tap для клавиши Escape/Control
+        mt_esc_ctl: mod_tap_ESC_CTL {
+            compatible = "zmk,behavior-hold-tap";
+            label = "MT_ESC_CTL";
+            #binding-cells = <0>;
+            tapping-term-ms = <MY_TAPPING_TERM>;
+            quick-tap-ms = <MY_QUICK_TAP_MS>;
+            flavor = "tap-preferred";
+            bindings = <&kp LCTRL>, <&kp ESCAPE>; // Удержание = LCTRL, Нажатие = ESC
         };
     };
 
-    conditional_layers {
-        compatible = "zmk,conditional-layers";
-        tri_layer {
-            if-layers = <LOWER RAISE>;
-            then-layer = <POINTER>;
-        };
+    // Настройки указателя мыши
+    // CHARYBDIS_MINIMUM_DEFAULT_DPI 1200
+    // CHARYBDIS_DRAGSCROLL_REVERSE_X
+    pointing_device_0 { // Убедитесь, что имя совпадает с тем, что указано в dts вашей платы
+        compatible = "zmk,input-mouse-ps2"; // или "zmk,input-mouse-pmw3360" и т.д. в зависимости от сенсора
     };
 
+    mouse_config {
+        compatible = "zmk,mouse-config";
+        events-per-microstep = <1>; // Может понадобиться подстройка
+        polling-interval-milli = <10>; // Интервал опроса, QMK по умолчанию ~8-10ms для 1000Hz
+         min-speed-multiplier = <1>;
+         max-speed-multiplier = <10>;
+         time-constant = <20>;
+         acceleration-exponent = <2>;
+
+        // Устанавливаем DPI
+        dpi = <1200>;
+
+        // Реверс оси X для скролла (dragscroll)
+        scroll-invert-x;
+        // scroll-invert-y; // если нужен реверс по Y
+    };
+
+
+    // Раскладка клавиш
+    // Замените _______ на &kp XXX или другие по вашему выбору
+    // Это примерная структура 3x6 + 3 клавиши под большой палец на каждой половине
     keymap {
         compatible = "zmk,keymap";
 
         default_layer {
-            label = "Base";
             bindings = <
-                // Layout similar to Charybdis 3x6
-                &kp Q      &kp W      &kp E      &kp R      &kp T          &kp Y      &kp U      &kp I      &kp O      &kp P
-                &kp A      &kp S      &kp D      &kp F      &kp G          &kp H      &kp J      &kp K      &kp L      &kp SEMI
-                &kp Z      &kp X      &kp C      &kp V      &kp B          &kp N      &kp M      &kp COMMA  &kp DOT    &kp SLASH
-                                      &lt LOWER ESC  &kp SPACE  &kp TAB     &kp ENTER  &kp BSPC   &lt RAISE DEL
-            >;
-            sensor-bindings = <&auto_pointer>;
-        };
-
-        lower_layer {
-            label = "Lower";
-            bindings = <
-                &kp N1     &kp N2     &kp N3     &kp N4     &kp N5         &kp N6     &kp N7     &kp N8     &kp N9     &kp N0
-                &kp F1     &kp F2     &kp F3     &kp F4     &kp F5         &kp F6     &kp LEFT   &kp DOWN   &kp UP     &kp RIGHT
-                &kp F7     &kp F8     &kp F9     &kp F10    &kp F11        &kp F12    &trans     &trans     &trans     &trans
-                                      &trans     &trans     &trans         &trans     &trans     &trans
+            // Левая половина                                // Правая половина
+            &kp Q       &kp W       &kp E       &kp R       &kp T       _______             _______     &kp Y       &kp U       &kp I       &kp O       &kp P
+            &kp A       &kp S       &kp D       &kp F       &kp G       _______             _______     &kp H       &kp J       &kp K       &kp L       &kp SEMI
+            &kp Z       &kp X       &kp C       &kp V       &kp B       _______             _______     &kp N       &kp M       &kp COMMA   &kp DOT     &kp FSLH
+                                    &mt_esc_ctl &lt_nav_tab &lt_num_spc         &kp LCTRL   &kp RALT    &kp LSHFT // Примерные клавиши для большого пальца
             >;
         };
 
-        raise_layer {
-            label = "Raise";
+        layer_NAV { // Слой навигации
             bindings = <
-                &kp EXCL   &kp AT     &kp HASH   &kp DLLR   &kp PRCNT      &kp CARET  &kp AMPS   &kp ASTRK  &kp LPAR   &kp RPAR
-                &kp GRAVE  &kp TILDE  &kp EQUAL  &kp PLUS   &kp MINUS      &kp UNDER  &kp LBRC   &kp RBRC   &kp LBKT   &kp RBKT
-                &bt BT_CLR &bt BT_SEL 0 &bt BT_SEL 1 &bt BT_SEL 2 &out OUT_TOG &trans  &trans     &trans     &kp BSLH   &kp PIPE
-                                      &trans     &trans     &trans         &trans     &trans     &trans
+            // Левая половина                                // Правая половина
+            &kp F1      &kp F2      &kp F3      &kp F4      &kp F5      _______             _______     &kp PGUP    &kp HOME    &kp UP      &kp END     &kp PSCR
+            &kp LCTRL   &kp LALT    &kp LGUI    &kp LSHFT   _______     _______             _______     &kp PGDN    &kp LEFT    &kp DOWN    &kp RIGHT   &kp INS
+            _______     _______     _______     _______     _______     _______             _______     _______     _______     _______     _______     &kp DEL
+                                    &trans      &trans      &trans              &trans      &trans      &trans      // &trans = прозрачная клавиша (действие с нижнего слоя)
             >;
         };
 
-        pointer_layer {
-            label = "Pointer";
+        layer_NUM { // Слой цифр и символов
             bindings = <
-                &trans     &trans     &trans     &trans     &trans         &trans     &mkp LCLK  &mmv MOVE_UP &mkp RCLK  &trans
-                &trans     &trans     &trans     &trans     &trans         &trans     &mmv MOVE_LEFT &mmv MOVE_DOWN &mmv MOVE_RIGHT &trans
-                &trans     &trans     &trans     &trans     &trans         &trans     &msc_reverse_x SCROLL_LEFT &msc SCROLL_DOWN &msc SCROLL_UP &msc_reverse_x SCROLL_RIGHT
-                                      &trans     &trans     &trans         &trans     &trans     &trans
+            // Левая половина                                // Правая половина
+            &kp GRAVE   &kp N1      &kp N2      &kp N3      &kp N4      &kp N5              &kp N6      &kp N7      &kp N8      &kp N9      &kp N0      &kp MINUS
+            &kp TAB     &kp EXLM    &kp AT      &kp HASH    &kp DLLR    &kp PRCNT           &kp CARET   &kp AMPS    &kp ASTRK   &kp LPAR    &kp RPAR    &kp EQUAL
+            _______     _______     _______     _______     _______     _______             _______     &kp LBRC    &kp RBRC    &kp BSLH    &kp QUOT    _______
+                                    &trans      &trans      &trans              &trans      &trans      &trans
+            >;
+        };
+
+        layer_MOUSE { // Слой управления указателем
+            bindings = <
+            // Левая половина                                // Правая половина
+            &kp ESC     M_WH_U      MS_U        M_WH_D      _______     _______             _______     &kp C_PREV  &kp C_PP    &kp C_NEXT  _______     _______
+            &kp LCTRL   MS_L        MS_D        MS_R        _______     _______             _______     M_WH_L      M_BTN2      M_BTN3      M_WH_R      _______
+            &kp LSHFT   &kp LGUI    &kp LALT    _______     _______     _______             _______     _______     _______     _______     _______     _______
+                                    M_BTN1      &mo MOUSE   M_BTN2              &trans      &trans      &trans      // Удерживайте для активации мыши, если слой не фиксирован
             >;
         };
     };
 };
+
