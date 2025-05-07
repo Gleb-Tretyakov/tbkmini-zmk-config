@@ -1,244 +1,65 @@
 /*
-Copyright (c) 2023 The ZMK Contributors
-
-SPDX-License-Identifier: MIT
-*/
-#include <behaviors.dtsi>
-#include <dt-bindings/zmk/keys.h>
-#include <dt-bindings/zmk/bt.h>
-#include <dt-bindings/zmk/outputs.h>
-#include <dt-bindings/zmk/rgb.h>
-#include <dt-bindings/zmk/ext_power.h>/*
-============================================================================
-CONFIGURATION SECTION
-============================================================================
-*/
-// Layer definitions
-#define LAYER_BASE 0       // Main typing layer (Engram)
-#define LAYER_LOWER 1      // Numbers and navigation
-#define LAYER_SYMB 2       // Symbols and special characters
-#define LAYER_ADJUST 3     // Device controls and settings
-#define LAYER_OLD_BASE 4   // QWERTY layout alternative/*
-KEY DEFINITIONS SECTION
-*/
-// Behavior settings
-&lt {
-tapping-term-ms = <200>;
-quick-tap-ms = <200>;    // Equivalent to RETRO_TAPPING
-flavor = "tap-preferred";
-};/*
-BEHAVIORS DEFINITIONS
-*/
-/ {
-behaviors {
-// Home row mods - Control on tap, Escape on hold
-mt_lctl_esc: mod_tap_lctl_esc {
-compatible = "zmk,behavior-hold-tap";
-label = "MT_LCTL_ESC";
-#binding-cells = <2>;
-tapping-term-ms = <200>;
-quick-tap-ms = <200>;
-flavor = "tap-preferred";
-bindings = <&kp>, <&kp>;
-};    // Right shift on hold, Enter on tap
-    mt_rsft_ent: mod_tap_rsft_ent {
-        compatible = "zmk,behavior-hold-tap";
-        label = "MT_RSFT_ENT";
-        #binding-cells = <2>;
-        tapping-term-ms = <200>;
-        quick-tap-ms = <200>;
-        flavor = "tap-preferred";
-        bindings = <&kp>, <&kp>;
-    };
-
-    // Double-tap language switcher behavior
-    dt_lang: double_tap_lang {
-        compatible = "zmk,behavior-tap-dance";
-        label = "DT_LANG";
-        #binding-cells = <0>;
-        tapping-term-ms = <300>;
-        bindings = <&lang_switch>, <&to LAYER_OLD_BASE>;
-    };
-};
-
-macros {
-    // Language switch macro (GUI+Space)
-    lang_switch: lang_switch {
-        label = "LANG_SWITCH";
-        compatible = "zmk,behavior-macro";
-        #binding-cells = <0>;
-        bindings = <&macro_press &kp LGUI>,
-                   <&macro_tap &kp SPACE>,
-                   <&macro_release &kp LGUI>;
-    };
-
-    // Navigation shortcuts
-    next_desktop: next_desktop {
-        label = "NEXT_DESKTOP";
-        compatible = "zmk,behavior-macro";
-        #binding-cells = <0>;
-        bindings = <&macro_press &kp LCTRL>,
-                   <&macro_tap &kp RIGHT>,
-                   <&macro_release &kp LCTRL>;
-    };
-
-    prev_desktop: prev_desktop {
-        label = "PREV_DESKTOP";
-        compatible = "zmk,behavior-macro";
-        #binding-cells = <0>;
-        bindings = <&macro_press &kp LCTRL>,
-                   <&macro_tap &kp LEFT>,
-                   <&macro_release &kp LCTRL>;
-    };
-
-    next_tab: next_tab {
-        label = "NEXT_TAB";
-        compatible = "zmk,behavior-macro";
-        #binding-cells = <0>;
-        bindings = <&macro_press &kp LGUI &kp LALT>,
-                   <&macro_tap &kp RIGHT>,
-                   <&macro_release &kp LGUI &kp LALT>;
-    };
-
-    prev_tab: prev_tab {
-        label = "PREV_TAB";
-        compatible = "zmk,behavior-macro";
-        #binding-cells = <0>;
-        bindings = <&macro_press &kp LGUI &kp LALT>,
-                   <&macro_tap &kp LEFT>,
-                   <&macro_release &kp LGUI &kp LALT>;
-    };
-};
-
-/*
- * KEYMAP SECTION
+ * Copyright (c) 2020 The ZMK Contributors
+ *
+ * SPDX-License-Identifier: MIT
  */
-keymap {
-    compatible = "zmk,keymap";
 
-    /**
-     * BASE LAYER - Engram Layout
-     * 
-     * Primary typing layer with Engram layout, home row mods, and layer access
-     * - Space (left thumb) and Backspace (right thumb) provide layer access when held
-     * - Language switcher (dt_lang) toggles input language and switches to QWERTY when double-tapped
-     * - Symbol layer accessed via C, N, or Backspace when held
-     * 
-     *   ,-------------------------------------------.                    ,-------------------------------------------.
-     *   |   TAB   |   B  |   Y  |   O  |   U  |  '  |                    |  -   |   L  |   D  |   W  |   V  |   Z    |
-     *   |---------|------+------+------+------+------|                   |------+------+------+------+------+---------|
-     *   |CTL/ESC  |   C* |   I  |   E  |   A  |  ,  |                    |  .   |   H  |   T  |   S  |   N* |   Q    |
-     *   |---------|------+------+------+------+------|                   |------+------+------+------+------+---------|
-     *   |   _     |   G  |   X  |   J  |   K  |  /  |                    |  ;   |   R  |   M  |   F  |   P  |SFT/ENT |
-     *   `-----------------+------+------+------+------|                   |------+------+------+------+-----------------'
-     *                     | LANG |LOWER |  GUI |                          | RSFT |RAISE |ALTGR |
-     *                     `----------------------'                        `----------------------'
-     */
-    base_layer {
-        label = "Engram";
-        bindings = <
-// ╭──────────────────────────────────────────────────────╮ ╭──────────────────────────────────────────────────────╮
-&kp TAB     &kp B      &kp Y      &kp O      &kp U     &kp SQT           &kp MINUS  &kp L      &kp D      &kp W      &kp V      &kp Z
-// ├──────────────────────────────────────────────────────┤ ├──────────────────────────────────────────────────────┤
-&mt_lctl_esc LCTRL ESC  &lt LAYER_SYMB C  &kp I  &kp E  &kp A  &kp COMMA    &kp DOT    &kp H      &kp T      &kp S  &lt LAYER_SYMB N  &kp Q
-// ├──────────────────────────────────────────────────────┤ ├──────────────────────────────────────────────────────┤
-&kp UNDER   &kp G      &kp X      &kp J      &kp K     &kp SLASH         &kp SEMI   &kp R      &kp M      &kp F      &kp P    &mt_rsft_ent RSFT ENTER
-// ╰──────────────────────────────────────────────────────┤ ├──────────────────────────────────────────────────────╯
-&dt_lang  &lt LAYER_LOWER SPACE  &kp LGUI             &kp RSFT  &lt LAYER_SYMB BSPC  &kp RALT
-//                    ╰───────────────────────────────────╯ ╰───────────────────────────────────────────╯
->;
-};    /**
-     * LOWER LAYER - Numbers, Navigation, and Media
-     *
-     * Right side: Numpad-style number layout with brackets and operators
-     * Left side: Media controls and window/tab navigation
-     * - RGB toggle and keyboard reset functions
-     * - Window/desktop navigation (previous/next)
-     * - Tab navigation (previous/next)
-     */
-    lower_layer {
-        label = "Lower";
-        bindings = <
-// ╭──────────────────────────────────────────────────────╮ ╭──────────────────────────────────────────────────────╮
-&trans     &rgb_ug_toggle  &kp C_NEXT  &kp C_PP  &kp C_PREV  &trans        &kp LBKT   &kp N7     &kp N8     &kp N9     &kp RBKT   &trans
-// ├──────────────────────────────────────────────────────┤ ├──────────────────────────────────────────────────────┤
-&trans     &kp LGUI        &kp LALT    &prev_tab &next_tab   &trans        &kp PLUS   &kp N4     &kp N5     &kp N6     &kp MINUS  &trans
-// ├──────────────────────────────────────────────────────┤ ├──────────────────────────────────────────────────────┤
-&bt BT_CLR &bootloader     &trans      &prev_desktop &next_desktop &trans  &kp N0     &kp N1     &kp N2     &kp N3     &kp FSLH   &trans
-// ╰──────────────────────────────────────────────────────┤ ├──────────────────────────────────────────────────────╯
-&trans     &trans     &trans                  &trans     &trans     &trans
-//                             ╰───────────────────────────╯ ╰───────────────────────────────────────╯
->;
-};    /**
-     * SYMBOL LAYER - Symbols and Special Characters
-     *
-     * Provides access to all symbols needed for coding and text editing.
-     * - Shifted number row symbols arranged in logical groups
-     * - Parentheses, brackets, and braces
-     * - Mathematical and coding operators
-     * - Punctuation and special characters
-     */
-    symbol_layer {
-        label = "Symbol";
-        bindings = <
-// ╭──────────────────────────────────────────────────────╮ ╭──────────────────────────────────────────────────────╮
-&kp TAB    &kp SQT   &kp LT     &kp GT     &kp DQT    &kp PIPE         &kp AMPS   &kp AMPS   &kp LBKT   &kp RBKT   &kp PRCNT  &kp BSPC
-// ├──────────────────────────────────────────────────────┤ ├──────────────────────────────────────────────────────┤
-&kp LGUI   &kp EXCL  &kp MINUS  &kp PLUS   &kp EQUAL  &kp HASH         &kp PIPE   &kp COLON  &kp LPAR   &kp RPAR   &kp QMARK  &kp GRAVE
-// ├──────────────────────────────────────────────────────┤ ├──────────────────────────────────────────────────────┤
-&kp LSHFT  &kp CARET &kp FSLH   &kp STAR   &kp BSLH   &none            &kp TILDE  &kp DLLR   &kp LBRC   &kp RBRC   &kp AT     &kp RCTRL
-// ╰──────────────────────────────────────────────────────┤ ├──────────────────────────────────────────────────────╯
-&trans     &trans     &kp LGUI             &kp RSFT   &trans     &trans
-//                             ╰───────────────────────────╯ ╰───────────────────────────────────────╯
->;
-};    /**
-     * ADJUST LAYER - Device Settings
-     *
-     * Controls for keyboard settings and device functions
-     * - Bluetooth profiles and output selection
-     * - Reset and bootloader access
-     * - RGB controls if hardware supports it
-     */
-    adjust_layer {
-        label = "Adjust";
-        bindings = <
-// ╭──────────────────────────────────────────────────────╮ ╭──────────────────────────────────────────────────────╮
-&trans     &rgb_ug_toggle &rgb_ug_up &rgb_ug_hue_up &rgb_ug_sat_up &rgb_ug_bri_up   &trans     &kp C_VOL_UP &kp C_MUTE  &kp C_VOL_DN &trans     &trans
-// ├──────────────────────────────────────────────────────┤ ├──────────────────────────────────────────────────────┤
-&trans     &bt BT_SEL 0  &bt BT_SEL 1 &bt BT_SEL 2 &bt BT_SEL 3 &bt BT_SEL 4       &kp LEFT   &kp DOWN   &kp UP     &kp RIGHT  &trans     &trans
-// ├──────────────────────────────────────────────────────┤ ├──────────────────────────────────────────────────────┤
-&trans     &out OUT_TOG  &trans     &rgb_ug_hue_dn &rgb_ug_sat_dn &rgb_ug_bri_dn   &kp HOME   &kp PG_DN  &kp PG_UP  &kp END    &trans     &trans
-// ╰──────────────────────────────────────────────────────┤ ├──────────────────────────────────────────────────────╯
-&bootloader &sys_reset &trans                            &trans     &sys_reset &bootloader
-//                          ╰───────────────────────────────╯ ╰───────────────────────────────────────╯
->;
-};    /**
-     * OLD BASE (QWERTY) - Traditional Layout
-     *
-     * Standard QWERTY layout for compatibility with others.
-     * - Access via double-tapping LANG key
-     * - Return to main layout with dedicated key (to)
-     * - Maintains similar layer access structure as base layer
-     */
-    old_base_layer {
-        label = "QWERTY";
-        bindings = <
-// ╭──────────────────────────────────────────────────────╮ ╭──────────────────────────────────────────────────────╮
-&kp TAB    &kp Q      &kp W      &kp E      &kp R      &kp T              &kp Y      &kp U      &kp I      &kp O      &kp P      &kp LBKT
-// ├──────────────────────────────────────────────────────┤ ├──────────────────────────────────────────────────────┤
-&mt_lctl_esc LCTRL ESC &kp A    &kp S      &kp D      &kp F      &kp G    &kp H      &kp J      &kp K      &kp L      &kp SEMI   &kp SQT
-// ├──────────────────────────────────────────────────────┤ ├──────────────────────────────────────────────────────┤
-&kp UNDER  &kp Z      &kp X      &kp C      &kp V      &kp B              &kp N      &kp M      &kp COMMA  &kp DOT    &kp RBKT   &mt_rsft_ent RSFT ENTER
-// ╰──────────────────────────────────────────────────────┤ ├──────────────────────────────────────────────────────╯
-&to LAYER_BASE &lt LAYER_LOWER SPACE &kp LGUI   &kp RSFT  &lt LAYER_SYMB BSPC  &kp RALT
-//                          ╰───────────────────────────────╯ ╰───────────────────────────────────────╯
->;
+#include <behaviors.dtsi>
+#include <dt-bindings/zmk/bt.h>
+#include <dt-bindings/zmk/keys.h>
+#include <dt-bindings/zmk/outputs.h>
+
+#define DEF 0
+#define LWR 1
+#define RSE 2
+#define ADJ 3
+
+&lt {
+    quick_tap_ms = <200>;
 };
-};conditional_layers {
-    compatible = "zmk,conditional-layers";
-    tri_layer {
-        if-layers = <LAYER_LOWER LAYER_SYMB>;
-        then-layer = <LAYER_ADJUST>;
+
+&mt {
+    quick_tap_ms = <200>;
+};
+
+/ {
+    keymap {
+        compatible = "zmk,keymap";
+
+        default_layer {
+            bindings = <
+&mt LALT ESC     &kp Q  &kp W  &kp E     &kp R  &kp T      &kp Y      &kp U          &kp I                  &kp O    &kp P     &kp LBKT
+&mt LCTRL TAB    &kp A  &kp S  &kp D     &kp F  &kp G      &kp H      &kp J          &kp K                  &kp L    &kp SEMI  &kp SQT
+&mt LSHIFT BSLH  &kp Z  &kp X  &kp C     &kp V  &kp B      &kp N      &kp M          &kp COMMA              &kp DOT  &kp FSLH  &mt LALT GRAVE
+                               &kp LGUI  &mo 1  &lt 2 RET  &kp SPACE  &kp BACKSPACE  &mt LS(LEFT_ALT) CAPS
+            >;
+        };
+
+        lower_layer {
+            bindings = <
+&trans     &kp N1    &kp N2       &kp N3        &kp N4          &kp N5            &kp N6             &kp N7           &kp N8     &kp N9                &kp N0                 &trans
+&trans     &kp EXCL  &kp AT       &kp HASH      &kp DOLLAR      &kp PERCENT       &kp CARET          &kp AMPS         &kp ASTRK  &kp LEFT_PARENTHESIS  &kp RIGHT_PARENTHESIS  &none
+&kp LSHFT  &none     &kp KP_PLUS  &kp KP_MINUS  &kp LEFT_BRACE  &kp LEFT_BRACKET  &kp RIGHT_BRACKET  &kp RIGHT_BRACE  &kp MINUS  &kp EQUAL             &none                  &kp BSLH
+                                  &kp LGUI      &trans          &mo 3             &trans             &kp DEL          &kp QMARK
+            >;
+        };
+
+        raise_layer {
+            bindings = <
+&kp LS(LG(N4))  &kp LS(LC(LG(N4)))  &kp LS(LG(N5))  &none     &kp PAGE_DOWN  &kp HOME  &none               &none                &kp PG_UP     &kp PG_DN      &kp HOME  &kp LS(LG(LC(N4)))
+&kp F1          &kp F2              &kp F3          &kp F4    &kp F5         &kp F6    &kp LEFT            &kp DOWN             &kp UP_ARROW  &kp RIGHT      &kp END   &none
+&kp F7          &kp F8              &kp F9          &kp F10   &kp F11        &kp F12   &kp LC(LEFT_ARROW)  &kp LC(RIGHT_ARROW)  &kp LA(LEFT)  &kp LA(RIGHT)  &trans    &trans
+                                                    &kp LGUI  &mo 3          &trans    &trans              &trans               &trans
+            >;
+        };
+
+        adjust_layer {
+            bindings = <
+&sys_reset    &bootloader    &none         &none         &none         &none         &none         &none         &none         &none         &bootloader   &sys_reset
+&bt BT_CLR    &bt BT_SEL 0   &bt BT_SEL 1  &bt BT_SEL 2  &bt BT_SEL 3  &bt BT_SEL 4  &bt BT_SEL 4  &bt BT_SEL 3  &bt BT_SEL 2  &bt BT_SEL 1  &bt BT_SEL 0  &bt BT_CLR
+&out OUT_TOG  &studio_unlock &none         &none         &none         &none         &none         &none         &none         &none         &studio_unlock &out OUT_TOG
+                                           &trans        &none         &trans        &trans        &none         &trans
+            >;
+        };
     };
-};
 };
