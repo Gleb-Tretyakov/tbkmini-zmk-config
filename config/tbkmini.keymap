@@ -113,7 +113,7 @@ keymap {
 &kp TAB     &kp B      &kp Y      &kp O      &kp U     &kp SQT           &kp MINUS  &kp L      &kp D      &kp W      &kp V      &kp Z
 &mt_lctl_esc LCTRL ESC  &lt SYMB C  &kp I  &kp E  &kp A  &kp COMMA    &kp DOT    &kp H      &kp T      &kp S  &lt SYMB N  &kp Q
 &kp UNDER   &kp G      &kp X      &kp J      &kp K     &kp SLASH         &kp SEMI   &kp R      &kp M      &kp F      &kp P    &mt_rsft_ent RSFT ENTER
-&dt_lang  &lt LOWER SPACE  &kp LGUI         &kp RSFT  &lt LOWER SPACE &kp RALT
+&dt_lang  &lt LOWER SPACE  &kp LGUI         &kp RSFT  &lt SYMB BSPC  &kp RALT
 >;
 };
 
@@ -153,7 +153,7 @@ keymap {
 &kp TAB    &kp Q      &kp W      &kp E      &kp R      &kp T          &kp Y      &kp U      &kp I      &kp O      &kp P      &kp LBKT
 &mt_lctl_esc LCTRL ESC &kp A    &kp S      &kp D      &kp F      &kp G    &kp H      &kp J      &kp K      &kp L      &kp SEMI   &kp SQT
 &kp UNDER  &kp Z      &kp X      &kp C      &kp V      &kp B          &kp N      &kp M      &kp COMMA  &kp DOT    &kp RBKT   &mt_rsft_ent RSFT ENTER
-&to BASE  &lt LOWER SPACE  &kp LGUI          &kp RSFT   &lt LOWER SPACE  &kp RALT
+&to BASE  &lt LOWER SPACE  &kp LGUI          &kp RSFT   &lt SYMB BSPC  &kp RALT
 >;
 };
 };
