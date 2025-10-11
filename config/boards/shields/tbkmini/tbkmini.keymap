@@ -232,13 +232,6 @@
         };
         
         // Task and messenger combinations
-        combo_slack {
-            timeout-ms = <40>;
-            key-positions = <0 1>;  // Adapted for 3x6 matrix
-            bindings = <&slack_toggle>;
-            layers = <BASE>;
-        };
-        
         combo_spotlight {
             timeout-ms = <40>;
             key-positions = <1 2>;  // Adapted for 3x6 matrix
@@ -348,13 +341,6 @@
         };
         
         // Browser combinations
-        combo_browser_dev_tools {
-            timeout-ms = <40>;
-            key-positions = <0 1>;  // Adapted for 3x6 matrix
-            bindings = <&browser_dev_tools>;
-            layers = <BASE>;
-        };
-        
         combo_browser_find {
             timeout-ms = <40>;
             key-positions = <1 2>;  // Adapted for 3x6 matrix
@@ -402,7 +388,7 @@
             quick-tap-ms = <175>;
             flavor = "balanced";
             bindings = <&kp>, <&kp>;
-            hold-trigger-key-positions = <7 8 9 10 16 17 18 19>;
+            hold-trigger-key-positions = <6 7 8 9 10 11 18 19 20 21 22 23 30 31 32 33 34 35>;  // Правая сторона (убрали 39 40 41 42 43)
             hold-trigger-on-release;
         };
 
@@ -413,7 +399,7 @@
             quick-tap-ms = <175>;
             flavor = "balanced";
             bindings = <&kp>, <&kp>;
-            hold-trigger-key-positions = <25 26 27 28 34 35 36 37>;
+            hold-trigger-key-positions = <0 1 2 3 4 5 12 13 14 15 16 17 24 25 26 27 28 29>;    // Левая сторона (убрали 36 37 38)
             hold-trigger-on-release;
         };
         
