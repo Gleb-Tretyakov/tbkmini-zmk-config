@@ -1108,7 +1108,7 @@
         // Navigation, multimedia and system functions
         NAV {
             bindings = <
-    &kp LA(KC_TAB)     &kp LG(KC_TAB)       &trans               &trans       &kp LG(LS(KC_TAB))  &screenshot                                                &kp PG_UP          &win_left          &kp UP             &win_right         &win_max             &trans
+    &kp LALT KC_TAB     &kp LGUI KC_TAB       &trans               &trans       &kp LGUI LSHFT KC_TAB  &screenshot                                                &kp PG_UP          &win_left          &kp UP             &win_right         &win_max             &trans
     &mt_lctl_esc LCTRL ESC &hml LGUI HOME     &hml LALT PG_DN    &hml LCTRL PG_UP   &hml LSHFT END     &trans                                               &kp PG_DN          &hmr RSHFT LEFT    &hmr RCTRL DOWN    &hmr RALT RIGHT    &hmr RGUI HOME       &trans
     &dt_shift          &prev_desktop      &vim_save         &select_word       &next_desktop      &prev_desktop                                              &select_line       &kp HOME           &kp END            &kp INS            &kp DEL              &mt_rsft_ent RSHFT ENTER
                                                                &trans             &trans             &trans                                                     &trans             &kp C_MUTE
