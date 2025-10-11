@@ -1098,7 +1098,7 @@
         // Symbols and special keys
         SYMB {
             bindings = <
-    &kp LS(KC_NONUS_BSLH)      &kp EXCL           &kp LT             &kp GT             &kp GRAVE          &kp PIPE                                                   &kp AMPS        &kp UNDER          &kp LBKT           &kp RBKT           &kp PRCNT            &kp AMPS
+    &kp LS(NONUS_BSLH)      &kp EXCL           &kp LT             &kp GT             &kp GRAVE          &kp PIPE                                                   &kp AMPS        &kp UNDER          &kp LBKT           &kp RBKT           &kp PRCNT            &kp AMPS
     &mt_lctl_esc LCTRL ESC &hml LGUI AT       &hml LALT MINUS    &hml LCTRL PLUS    &hml LSHFT EQUAL   &kp HASH                                                   &kp PIPE        &hmr RSHFT COLON   &hmr RCTRL LPAR    &hmr RALT RPAR     &hmr RGUI QMARK      &kp SQT
     &dt_shift          &kp CARET          &kp FSLH           &kp STAR           &kp BSLH           &none                                                      &kp LS(KC_NONUS_BSLH)   &kp DLLR           &kp LBRC           &kp RBRC           &kp AT               &mt_rsft_ent RSHFT ENTER
                                                                &trans             &kp SPACE          &trans                                                     &trans             &trans
