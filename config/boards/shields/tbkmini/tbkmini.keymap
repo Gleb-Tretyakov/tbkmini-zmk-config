@@ -124,24 +124,40 @@
         };
         
         combo_cut {
+            timeout-ms = <40>;
+            key-positions = <10 11>;
             bindings = <&cut_macro>;
+            layers = <BASE>;
         };
 
         combo_copy {
+            timeout-ms = <40>;
+            key-positions = <11 12>;
             bindings = <&copy_macro>;
+            layers = <BASE>;
         };
 
         combo_paste {
+            timeout-ms = <40>;
+            key-positions = <12 13>;
             bindings = <&paste_macro>;
+            layers = <BASE>;
         };
 
         combo_undo {
+            timeout-ms = <40>;
+            key-positions = <9 11>;
             bindings = <&undo_macro>;
+            layers = <BASE>;
         };
 
         combo_redo {
+            timeout-ms = <40>;
+            key-positions = <9 12>;
             bindings = <&redo_macro>;
+            layers = <BASE>;
         };
+
         
         // Programming symbols
         combo_arrow {
@@ -238,27 +254,6 @@
             layers = <BASE>;
         };
         
-        combo_vim_quit {
-            timeout-ms = <40>;
-            key-positions = <3 4>;  // Adapted for 3x6 matrix
-            bindings = <&macro_press &kp LGUI &macro_tap &kp Q &macro_release &kp LGUI>;
-            layers = <BASE>;
-        };
-        
-        combo_vim_split {
-            timeout-ms = <40>;
-            key-positions = <4 5>;  // Adapted for 3x6 matrix
-            bindings = <&macro_press &kp LGUI &macro_tap &kp W &macro_tap &kp S &macro_release &kp LGUI>;
-            layers = <BASE>;
-        };
-        
-        combo_vim_vsplit {
-            timeout-ms = <40>;
-            key-positions = <5 6>;  // Adapted for 3x6 matrix
-            bindings = <&macro_press &kp LGUI &macro_tap &kp W &macro_tap &kp V &macro_release &kp LGUI>;
-            layers = <BASE>;
-        };
-        
         // Additional VS Code combinations
         combo_vscode_comment {
             timeout-ms = <40>;
@@ -338,14 +333,6 @@
             layers = <BASE>;
         };
         
-        // Text manipulation combinations
-        combo_select_all {
-            timeout-ms = <40>;
-            key-positions = <23 24>;  // Adapted for 3x6 matrix
-            bindings = <&select_all>;
-            layers = <BASE>;
-        };
-        
         combo_copy_all {
             timeout-ms = <40>;
             key-positions = <24 25>;  // Adapted for 3x6 matrix
@@ -361,13 +348,6 @@
         };
         
         // Browser combinations
-        combo_browser_refresh {
-            timeout-ms = <40>;
-            key-positions = <26 27>;  // Adapted for 3x6 matrix
-            bindings = <&browser_refresh>;
-            layers = <BASE>;
-        };
-        
         combo_browser_dev_tools {
             timeout-ms = <40>;
             key-positions = <0 1>;  // Adapted for 3x6 matrix
@@ -1112,12 +1092,13 @@
         // Base layer (QWERTY)
         BASE {
             bindings = <
-    &kp TAB            &kp Q              &kp W              &kp E              &kp R              &kp T                                                      &kp Y              &kp U              &kp I              &kp O              &kp P                &kp LBKT
-    &mt_lctl_esc LCTRL ESC  &hml LGUI A   &hml LALT S        &hml LCTRL D       &hml LSHFT F       &kp G                                                      &kp H              &hmr RSHFT J       &hmr RCTRL K       &hmr RALT L        &hmr RGUI SEMI       &kp SQT
-    &dt_shift          &kp Z              &kp X              &kp C              &kp V              &kp B                                                      &kp N              &kp M              &comma_semi        &dot_colon         &kp FSLH             &mt_rsft_ent RSHFT ENTER
-                                                               &dt_lang               &smart_layer LOWER SPACE &kp LGUI                                              &kp RALT           &smart_layer SYMB BSPC
+        &kp TAB            &kp Q              &kp W              &kp E              &kp R              &kp T                                                      &kp Y              &kp U              &kp I              &kp O              &kp P                &kp LBKT
+        &mt LCTRL ESC      &hml LGUI A        &hml LALT S        &hml LCTRL D       &hml LSHFT F       &kp G                                                      &kp H              &hmr RSHFT J       &hmr RCTRL K       &hmr RALT L        &hmr RGUI SEMI       &kp SQT
+        &dt_shift          &kp Z              &kp X              &kp C              &kp V              &kp B                                                      &kp N              &kp M              &comma_semi        &dot_colon         &kp FSLH             &mt RSHFT ENTER
+                                                                &dt_lang           &smart_layer LOWER SPACE &kp LGUI                                              &kp RALT           &smart_layer SYMB BSPC
             >;
         };
+
 
         // Numbers, F-keys and math
         LOWER {
@@ -1132,12 +1113,13 @@
         // Symbols and special keys
         SYMB {
             bindings = <
-    &kp LSHFT GRAVE &kp EXCL           &kp LT             &kp GT             &kp GRAVE          &kp PIPE                                                   &kp AMPS        &kp UNDER          &kp LBKT           &kp RBKT           &kp PRCNT            &kp AMPS
-    &mt_lctl_esc LCTRL ESC &hml LGUI AT       &hml LALT MINUS    &hml LCTRL PLUS    &hml LSHFT EQUAL   &kp HASH                                                   &kp PIPE        &hmr RSHFT COLON   &hmr RCTRL LPAR    &hmr RALT RPAR     &hmr RGUI QMARK      &kp SQT
-    &dt_shift          &kp CARET          &kp FSLH           &kp STAR           &kp BSLH           &none                                                      &kp LSHFT GRAVE &kp DLLR           &kp LBRC           &kp RBRC           &kp AT               &mt_rsft_ent RSHFT ENTER
-                                                               &trans             &kp SPACE          &trans                                                     &trans             &trans
+    &kp TILDE          &kp EXCL           &kp LT             &kp GT             &kp GRAVE          &kp PIPE                                                   &kp AMPS        &kp UNDER          &kp LBKT           &kp RBKT           &kp PRCNT            &kp AMPS
+    &mt LCTRL ESC      &hml LGUI AT       &hml LALT MINUS    &hml LCTRL PLUS    &hml LSHFT EQUAL   &kp HASH                                                   &kp PIPE        &hmr RSHFT COLON   &hmr RCTRL LPAR    &hmr RALT RPAR     &hmr RGUI QMARK      &kp SQT
+    &dt_shift          &kp CARET          &kp FSLH           &kp STAR           &kp BSLH           &none                                                      &kp TILDE       &kp DLLR           &kp LBRC           &kp RBRC           &kp AT               &mt RSHFT ENTER
+                                                                &trans             &kp SPACE          &trans                                                     &trans             &trans
             >;
         };
+
 
         // Navigation, multimedia and system functions
         NAV {
