@@ -124,38 +124,23 @@
         };
         
         combo_cut {
-            timeout-ms = <40>;
-            key-positions = <10 11>;  // Adapted for 3x6 matrix
-            bindings = <&kp LCTRL X>;
-            layers = <BASE>;
+            bindings = <&cut_macro>;
         };
-        
+
         combo_copy {
-            timeout-ms = <40>;
-            key-positions = <11 12>;  // Adapted for 3x6 matrix
-            bindings = <&kp LCTRL C>;
-            layers = <BASE>;
+            bindings = <&copy_macro>;
         };
-        
+
         combo_paste {
-            timeout-ms = <40>;
-            key-positions = <12 13>;  // Adapted for 3x6 matrix
-            bindings = <&kp LCTRL V>;
-            layers = <BASE>;
+            bindings = <&paste_macro>;
         };
-        
+
         combo_undo {
-            timeout-ms = <40>;
-            key-positions = <9 11>;  // Adapted for 3x6 matrix
-            bindings = <&kp LCTRL Z>;
-            layers = <BASE>;
+            bindings = <&undo_macro>;
         };
-        
+
         combo_redo {
-            timeout-ms = <40>;
-            key-positions = <9 12>;  // Adapted for 3x6 matrix
-            bindings = <&kp LCTRL LSHFT Z>;
-            layers = <BASE>;
+            bindings = <&redo_macro>;
         };
         
         // Programming symbols
@@ -1062,6 +1047,55 @@
                        <&macro_tap &kp SPACE>,
                        <&macro_release &kp LGUI &kp LCTRL>;
         };
+
+        // Combo macros
+        cut_macro: cut_macro {
+            compatible = "zmk,behavior-macro";
+            #binding-cells = <0>;
+            bindings = <&macro_press &kp LCTRL &macro_tap &kp X &macro_release &kp LCTRL>;
+        };
+
+        copy_macro: copy_macro {
+            compatible = "zmk,behavior-macro";
+            #binding-cells = <0>;
+            bindings = <&macro_press &kp LCTRL &macro_tap &kp C &macro_release &kp LCTRL>;
+        };
+
+        paste_macro: paste_macro {
+            compatible = "zmk,behavior-macro";
+            #binding-cells = <0>;
+            bindings = <&macro_press &kp LCTRL &macro_tap &kp V &macro_release &kp LCTRL>;
+        };
+
+        undo_macro: undo_macro {
+            compatible = "zmk,behavior-macro";
+            #binding-cells = <0>;
+            bindings = <&macro_press &kp LCTRL &macro_tap &kp Z &macro_release &kp LCTRL>;
+        };
+
+        redo_macro: redo_macro {
+            compatible = "zmk,behavior-macro";
+            #binding-cells = <0>;
+            bindings = <&macro_press &kp LCTRL &kp LSHFT &macro_tap &kp Z &macro_release &kp LCTRL &kp LSHFT>;
+        };
+
+        alt_tab_macro: alt_tab_macro {
+            compatible = "zmk,behavior-macro";
+            #binding-cells = <0>;
+            bindings = <&macro_press &kp LALT &macro_tap &kp TAB &macro_release &kp LALT>;
+        };
+
+        cmd_tab_macro: cmd_tab_macro {
+            compatible = "zmk,behavior-macro";
+            #binding-cells = <0>;
+            bindings = <&macro_press &kp LGUI &macro_tap &kp TAB &macro_release &kp LGUI>;
+        };
+
+        cmd_shift_tab_macro: cmd_shift_tab_macro {
+            compatible = "zmk,behavior-macro";
+            #binding-cells = <0>;
+            bindings = <&macro_press &kp LGUI &kp LSHFT &macro_tap &kp TAB &macro_release &kp LGUI &kp LSHFT>;
+        };
     };
 
     conditional_layers {
@@ -1108,10 +1142,10 @@
         // Navigation, multimedia and system functions
         NAV {
             bindings = <
-    &kp LALT TAB     &kp LGUI TAB       &trans               &trans       &kp LGUI LSHFT TAB  &screenshot                                                &kp PG_UP          &win_left          &kp UP             &win_right         &win_max             &trans
-    &mt_lctl_esc LCTRL ESC &hml LGUI HOME     &hml LALT PG_DN    &hml LCTRL PG_UP   &hml LSHFT END     &trans                                               &kp PG_DN          &hmr RSHFT LEFT    &hmr RCTRL DOWN    &hmr RALT RIGHT    &hmr RGUI HOME       &trans
-    &dt_shift          &prev_desktop      &vim_save         &select_word       &next_desktop      &prev_desktop                                              &select_line       &kp HOME           &kp END            &kp INS            &kp DEL              &mt_rsft_ent RSHFT ENTER
-                                                               &trans             &trans             &trans                                                     &trans             &kp C_MUTE
+    &alt_tab_macro     &cmd_tab_macro       &trans               &trans       &cmd_shift_tab_macro  &screenshot    &kp PG_UP    &win_left    &kp UP       &win_right   &win_max     &trans
+    &mt_lctl_esc LCTRL ESC &hml LGUI HOME     &hml LALT PG_DN    &hml LCTRL PG_UP   &hml LSHFT END     &trans         &kp PG_DN    &hmr RSHFT LEFT    &hmr RCTRL DOWN    &hmr RALT RIGHT    &hmr RGUI HOME    &trans
+    &dt_shift          &prev_desktop      &vim_save         &select_word       &next_desktop      &prev_desktop  &select_line &kp HOME     &kp END      &kp INS      &kp DEL      &mt_rsft_ent RSHFT ENTER
+                                                               &trans             &trans             &trans         &trans       &kp C_MUTE
             >;
         };
 
