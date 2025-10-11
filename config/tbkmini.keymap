@@ -16,7 +16,6 @@
 #define ADJUST 4
 #define COLEMAK_DH 5
 #define GAMING 6
-#define MOUSE 7
 
 // Optimized global settings
 &lt {
@@ -877,14 +876,5 @@
             >;
         };
 
-        // Mouse layer
-        MOUSE {
-            bindings = <
-    &trans             &trans             &trans             &trans             &trans             &trans                                                     &kp MS_BTN4        &kp MS_BTN5        &kp MS_UP          &kp MS_WH_UP       &trans               &trans
-    &trans             &trans             &trans             &trans             &trans             &trans                                                     &kp MS_BTN1        &kp MS_LEFT        &kp MS_DOWN        &kp MS_RIGHT       &kp MS_BTN2          &trans
-    &trans             &trans             &trans             &trans             &trans             &trans                                                     &trans             &trans             &trans             &trans             &kp MS_BTN3          &trans
-                                                               &trans             &trans             &trans                                                     &trans             &trans
-            >;
-        };
     };
 };
