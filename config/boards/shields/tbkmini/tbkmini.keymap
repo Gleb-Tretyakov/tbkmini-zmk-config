@@ -15,7 +15,7 @@
 #define NAV 3
 #define ADJUST 4
 #define COLEMAK_DH 5
-#define COLEMAK_DH 5
+#define GAMING 6
 
 // Optimized global settings
 &lt {
@@ -40,6 +40,394 @@
 };
 
 / {
+    combos {
+        compatible = "zmk,combos";
+        
+        // Frequent symbols with one hand (only QWERTY layer)
+        combo_esc {
+            timeout-ms = <40>;
+            key-positions = <7 8>;  // Adapted for 3x6 matrix
+            bindings = <&kp ESC>;
+            layers = <BASE>;
+        };
+        
+        combo_tab {
+            timeout-ms = <40>;
+            key-positions = <0 1>;  // Adapted for 3x6 matrix
+            bindings = <&kp TAB>;
+            layers = <BASE>;
+        };
+        
+        combo_enter {
+            timeout-ms = <40>;
+            key-positions = <16 17>;  // Adapted for 3x6 matrix
+            bindings = <&kp ENTER>;
+            layers = <BASE>;
+        };
+        
+        combo_del {
+            timeout-ms = <40>;
+            key-positions = <4 5>;  // Adapted for 3x6 matrix
+            bindings = <&kp DEL>;
+            layers = <BASE>;
+        };
+        
+        // Bracket types (only QWERTY layer)
+        combo_lpar {
+            timeout-ms = <40>;
+            key-positions = <9 10>;  // Adapted for 3x6 matrix
+            bindings = <&kp LPAR>;
+            layers = <BASE>;
+        };
+        
+        combo_rpar {
+            timeout-ms = <40>;
+            key-positions = <13 14>;  // Adapted for 3x6 matrix
+            bindings = <&kp RPAR>;
+            layers = <BASE>;
+        };
+        
+        combo_lbkt {
+            timeout-ms = <40>;
+            key-positions = <3 4>;  // Adapted for 3x6 matrix
+            bindings = <&kp LBKT>;
+            layers = <BASE>;
+        };
+        
+        combo_rbkt {
+            timeout-ms = <40>;
+            key-positions = <7 8>;  // Adapted for 3x6 matrix
+            bindings = <&kp RBKT>;
+            layers = <BASE>;
+        };
+        
+        combo_lbrc {
+            timeout-ms = <40>;
+            key-positions = <9 10>;  // Adapted for 3x6 matrix
+            bindings = <&kp LBRC>;
+            layers = <BASE>;
+        };
+        
+        combo_rbrc {
+            timeout-ms = <40>;
+            key-positions = <13 14>;  // Adapted for 3x6 matrix
+            bindings = <&kp RBRC>;
+            layers = <BASE>;
+        };
+        
+        // Special functions (only QWERTY layer)
+        combo_caps_word {
+            timeout-ms = <40>;
+            key-positions = <10 13>;  // Adapted for 3x6 matrix
+            bindings = <&caps_word>;
+            layers = <BASE>;
+        };
+        
+        combo_cut {
+            timeout-ms = <40>;
+            key-positions = <10 11>;  // Adapted for 3x6 matrix
+            bindings = <&kp LC(X)>;
+            layers = <BASE>;
+        };
+        
+        combo_copy {
+            timeout-ms = <40>;
+            key-positions = <11 12>;  // Adapted for 3x6 matrix
+            bindings = <&kp LC(C)>;
+            layers = <BASE>;
+        };
+        
+        combo_paste {
+            timeout-ms = <40>;
+            key-positions = <12 13>;  // Adapted for 3x6 matrix
+            bindings = <&kp LC(V)>;
+            layers = <BASE>;
+        };
+        
+        combo_undo {
+            timeout-ms = <40>;
+            key-positions = <9 11>;  // Adapted for 3x6 matrix
+            bindings = <&kp LC(Z)>;
+            layers = <BASE>;
+        };
+        
+        combo_redo {
+            timeout-ms = <40>;
+            key-positions = <9 12>;  // Adapted for 3x6 matrix
+            bindings = <&kp LC(LS(Z))>;
+            layers = <BASE>;
+        };
+        
+        // Programming symbols
+        combo_arrow {
+            timeout-ms = <40>;
+            key-positions = <4 5>;  // Adapted for 3x6 matrix
+            bindings = <&arrow_macro>;
+            layers = <BASE>;
+        };
+        
+        combo_fat_arrow {
+            timeout-ms = <40>;
+            key-positions = <16 17>;  // Adapted for 3x6 matrix
+            bindings = <&fat_arrow_macro>;
+            layers = <BASE>;
+        };
+        
+        // VS Code and vim combinations
+        combo_vscode_terminal {
+            timeout-ms = <40>;
+            key-positions = <8 9>;  // Adapted for 3x6 matrix
+            bindings = <&vscode_terminal>;
+            layers = <BASE>;
+        };
+        
+        combo_vscode_explorer {
+            timeout-ms = <40>;
+            key-positions = <9 10>;  // Adapted for 3x6 matrix
+            bindings = <&vscode_explorer>;
+            layers = <BASE>;
+        };
+        
+        combo_vscode_search {
+            timeout-ms = <40>;
+            key-positions = <10 11>;  // Adapted for 3x6 matrix
+            bindings = <&vscode_search>;
+            layers = <BASE>;
+        };
+        
+        combo_vscode_format {
+            timeout-ms = <40>;
+            key-positions = <11 12>;  // Adapted for 3x6 matrix
+            bindings = <&vscode_format>;
+            layers = <BASE>;
+        };
+        
+        combo_duplicate_line {
+            timeout-ms = <40>;
+            key-positions = <12 13>;  // Adapted for 3x6 matrix
+            bindings = <&duplicate_line>;
+            layers = <BASE>;
+        };
+        
+        combo_delete_line {
+            timeout-ms = <40>;
+            key-positions = <13 14>;  // Adapted for 3x6 matrix
+            bindings = <&delete_line>;
+            layers = <BASE>;
+        };
+        
+        combo_goto_definition {
+            timeout-ms = <40>;
+            key-positions = <14 15>;  // Adapted for 3x6 matrix
+            bindings = <&vscode_goto_definition>;
+            layers = <BASE>;
+        };
+        
+        combo_references {
+            timeout-ms = <40>;
+            key-positions = <15 16>;  // Adapted for 3x6 matrix
+            bindings = <&vscode_references>;
+            layers = <BASE>;
+        };
+        
+        // Task and messenger combinations
+        combo_slack {
+            timeout-ms = <40>;
+            key-positions = <0 1>;  // Adapted for 3x6 matrix
+            bindings = <&slack_toggle>;
+            layers = <BASE>;
+        };
+        
+        combo_spotlight {
+            timeout-ms = <40>;
+            key-positions = <1 2>;  // Adapted for 3x6 matrix
+            bindings = <&spotlight>;
+            layers = <BASE>;
+        };
+        
+        // Vim combinations
+        combo_vim_save {
+            timeout-ms = <40>;
+            key-positions = <2 3>;  // Adapted for 3x6 matrix
+            bindings = <&vim_save>;
+            layers = <BASE>;
+        };
+        
+        combo_vim_quit {
+            timeout-ms = <40>;
+            key-positions = <3 4>;  // Adapted for 3x6 matrix
+            bindings = <&macro_press &kp LGUI &macro_tap &kp Q &macro_release &kp LGUI>;
+            layers = <BASE>;
+        };
+        
+        combo_vim_split {
+            timeout-ms = <40>;
+            key-positions = <4 5>;  // Adapted for 3x6 matrix
+            bindings = <&macro_press &kp LGUI &macro_tap &kp W &macro_tap &kp S &macro_release &kp LGUI>;
+            layers = <BASE>;
+        };
+        
+        combo_vim_vsplit {
+            timeout-ms = <40>;
+            key-positions = <5 6>;  // Adapted for 3x6 matrix
+            bindings = <&macro_press &kp LGUI &macro_tap &kp W &macro_tap &kp V &macro_release &kp LGUI>;
+            layers = <BASE>;
+        };
+        
+        // Additional VS Code combinations
+        combo_vscode_comment {
+            timeout-ms = <40>;
+            key-positions = <12 13>;  // Adapted for 3x6 matrix
+            bindings = <&vscode_comment_line>;
+            layers = <BASE>;
+        };
+        
+        combo_vscode_sidebar {
+            timeout-ms = <40>;
+            key-positions = <13 14>;  // Adapted for 3x6 matrix
+            bindings = <&vscode_toggle_sidebar>;
+            layers = <BASE>;
+        };
+        
+        combo_vscode_panel {
+            timeout-ms = <40>;
+            key-positions = <14 15>;  // Adapted for 3x6 matrix
+            bindings = <&vscode_toggle_panel>;
+            layers = <BASE>;
+        };
+        
+        combo_vscode_quick_open {
+            timeout-ms = <40>;
+            key-positions = <15 16>;  // Adapted for 3x6 matrix
+            bindings = <&vscode_quick_open>;
+            layers = <BASE>;
+        };
+        
+        combo_vscode_symbol_search {
+            timeout-ms = <40>;
+            key-positions = <16 17>;  // Adapted for 3x6 matrix
+            bindings = <&vscode_symbol_search>;
+            layers = <BASE>;
+        };
+        
+        combo_vscode_rename {
+            timeout-ms = <40>;
+            key-positions = <17 18>;  // Adapted for 3x6 matrix
+            bindings = <&vscode_rename_symbol>;
+            layers = <BASE>;
+        };
+        
+        combo_vscode_problems {
+            timeout-ms = <40>;
+            key-positions = <18 19>;  // Adapted for 3x6 matrix
+            bindings = <&vscode_show_problems>;
+            layers = <BASE>;
+        };
+        
+        // macOS window management combinations
+        combo_app_expose {
+            timeout-ms = <40>;
+            key-positions = <19 20>;  // Adapted for 3x6 matrix
+            bindings = <&app_expose>;
+            layers = <BASE>;
+        };
+        
+        combo_mission_control {
+            timeout-ms = <40>;
+            key-positions = <20 21>;  // Adapted for 3x6 matrix
+            bindings = <&mission_control>;
+            layers = <BASE>;
+        };
+        
+        combo_app_switch {
+            timeout-ms = <40>;
+            key-positions = <21 22>;  // Adapted for 3x6 matrix
+            bindings = <&app_switch>;
+            layers = <BASE>;
+        };
+        
+        combo_reverse_app_switch {
+            timeout-ms = <40>;
+            key-positions = <22 23>;  // Adapted for 3x6 matrix
+            bindings = <&reverse_app_switch>;
+            layers = <BASE>;
+        };
+        
+        // Text manipulation combinations
+        combo_select_all {
+            timeout-ms = <40>;
+            key-positions = <23 24>;  // Adapted for 3x6 matrix
+            bindings = <&select_all>;
+            layers = <BASE>;
+        };
+        
+        combo_copy_all {
+            timeout-ms = <40>;
+            key-positions = <24 25>;  // Adapted for 3x6 matrix
+            bindings = <&copy_all>;
+            layers = <BASE>;
+        };
+        
+        combo_paste_plain {
+            timeout-ms = <40>;
+            key-positions = <25 26>;  // Adapted for 3x6 matrix
+            bindings = <&paste_without_formatting>;
+            layers = <BASE>;
+        };
+        
+        // Browser combinations
+        combo_browser_refresh {
+            timeout-ms = <40>;
+            key-positions = <26 27>;  // Adapted for 3x6 matrix
+            bindings = <&browser_refresh>;
+            layers = <BASE>;
+        };
+        
+        combo_browser_dev_tools {
+            timeout-ms = <40>;
+            key-positions = <0 1>;  // Adapted for 3x6 matrix
+            bindings = <&browser_dev_tools>;
+            layers = <BASE>;
+        };
+        
+        combo_browser_find {
+            timeout-ms = <40>;
+            key-positions = <1 2>;  // Adapted for 3x6 matrix
+            bindings = <&browser_find>;
+            layers = <BASE>;
+        };
+        
+        // Task management combinations
+        combo_todoist {
+            timeout-ms = <40>;
+            key-positions = <2 3>;  // Adapted for 3x6 matrix
+            bindings = <&todoist_toggle>;
+            layers = <BASE>;
+        };
+        
+        combo_notion {
+            timeout-ms = <40>;
+            key-positions = <3 4>;  // Adapted for 3x6 matrix
+            bindings = <&notion_toggle>;
+            layers = <BASE>;
+        };
+        
+        // System function combinations
+        combo_force_quit {
+            timeout-ms = <40>;
+            key-positions = <4 5>;  // Adapted for 3x6 matrix
+            bindings = <&force_quit>;
+            layers = <BASE>;
+        };
+        
+        combo_emoji {
+            timeout-ms = <40>;
+            key-positions = <5 6>;  // Adapted for 3x6 matrix
+            bindings = <&emoji_picker>;
+            layers = <BASE>;
+        };
+    };
+
     behaviors {
         // Improved home row mods for 3x6 matrix
         hml: homerow_mods_left {
@@ -107,7 +495,7 @@
             compatible = "zmk,behavior-tap-dance";
             #binding-cells = <0>;
             tapping-term-ms = <250>;
-            bindings = <&lang_switch>, <&to COLEMAK_DH>;
+            bindings = <&lang_switch>, <&to COLEMAK_DH>, <&to GAMING>;
         };
         
         dt_shift: dt_shift {
@@ -693,17 +1081,17 @@
     &kp TAB            &kp Q              &kp W              &kp E              &kp R              &kp T                                                      &kp Y              &kp U              &kp I              &kp O              &kp P                &kp LBKT
     &mt_lctl_esc LCTRL ESC  &hml LGUI A   &hml LALT S        &hml LCTRL D       &hml LSHFT F       &kp G                                                      &kp H              &hmr RSHFT J       &hmr RCTRL K       &hmr RALT L        &hmr RGUI SEMI       &kp SQT
     &dt_shift          &kp Z              &kp X              &kp C              &kp V              &kp B                                                      &kp N              &kp M              &comma_semi        &dot_colon         &kp FSLH             &mt_rsft_ent RSHFT ENTER
-                                                                &dt_lang               &smart_layer LOWER SPACE &kp LGUI                                              &kp RALT           &smart_layer SYMB BSPC   &trans
+                                                               &dt_lang               &smart_layer LOWER SPACE &kp LGUI                                              &kp RALT           &smart_layer SYMB BSPC
             >;
         };
 
         // Numbers, F-keys and math
         LOWER {
             bindings = <
-    &kp GRAVE          &kp N1             &kp N2             &kp N3             &kp N4             &kp N5                                                     &kp N6             &kp N7             &kp N8             &kp N9             &kp N0               &kp STAR
+    &kp F1             &kp F2             &kp F3             &kp F4             &kp F5             &kp F6                                                     &kp F7             &kp F8             &kp F9             &kp F10            &kp F11              &kp F12
     &mt_lctl_esc LCTRL ESC &hml LGUI AMPS     &hml LALT LPAR     &hml LCTRL RPAR    &hml LSHFT UNDER   &kp MINUS                                                  &kp EQUAL          &hmr RSHFT N4      &hmr RCTRL N5      &hmr RALT N6       &hmr RGUI DOT        &kp FSLH
     &bootloader        &kp PIPE           &kp LBKT           &kp RBKT           &kp LBRC           &kp RBRC                                                   &kp N0             &kp N1             &kp N2             &kp N3             &kp COMMA            &mt_rsft_ent RSHFT ENTER
-                                                                &trans             &trans             &trans                                                     &trans             &kp DEL   &trans
+                                                               &trans             &trans             &trans                                                     &trans             &kp DEL
             >;
         };
 
@@ -713,7 +1101,7 @@
     &kp LS(KC_NONUS_BSLH)      &kp EXCL           &kp LT             &kp GT             &kp GRAVE          &kp PIPE                                                   &kp AMPS        &kp UNDER          &kp LBKT           &kp RBKT           &kp PRCNT            &kp AMPS
     &mt_lctl_esc LCTRL ESC &hml LGUI AT       &hml LALT MINUS    &hml LCTRL PLUS    &hml LSHFT EQUAL   &kp HASH                                                   &kp PIPE        &hmr RSHFT COLON   &hmr RCTRL LPAR    &hmr RALT RPAR     &hmr RGUI QMARK      &kp SQT
     &dt_shift          &kp CARET          &kp FSLH           &kp STAR           &kp BSLH           &none                                                      &kp LS(KC_NONUS_BSLH)   &kp DLLR           &kp LBRC           &kp RBRC           &kp AT               &mt_rsft_ent RSHFT ENTER
-                                                                &trans             &kp SPACE          &trans                                                     &trans             &trans   &trans
+                                                               &trans             &kp SPACE          &trans                                                     &trans             &trans
             >;
         };
 
@@ -723,7 +1111,7 @@
     &kp LA(KC_TAB)     &kp LG(KC_TAB)       &trans               &trans       &kp LG(LS(KC_TAB))  &screenshot                                                &kp PG_UP          &win_left          &kp UP             &win_right         &win_max             &trans
     &mt_lctl_esc LCTRL ESC &hml LGUI HOME     &hml LALT PG_DN    &hml LCTRL PG_UP   &hml LSHFT END     &trans                                               &kp PG_DN          &hmr RSHFT LEFT    &hmr RCTRL DOWN    &hmr RALT RIGHT    &hmr RGUI HOME       &trans
     &dt_shift          &prev_desktop      &vim_save         &select_word       &next_desktop      &prev_desktop                                              &select_line       &kp HOME           &kp END            &kp INS            &kp DEL              &mt_rsft_ent RSHFT ENTER
-                                                                &trans             &trans             &trans                                                     &trans             &kp C_MUTE   &trans
+                                                               &trans             &trans             &trans                                                     &trans             &kp C_MUTE
             >;
         };
 
@@ -733,7 +1121,7 @@
     &trans             &bt BT_CLR         &trans             &trans             &trans             &out OUT_TOG                                               &trans             &kp C_VOL_UP       &kp C_MUTE         &kp C_VOL_DN       &trans               &trans
     &mt_lctl_esc LCTRL ESC &trans             &trans             &trans             &trans             &trans                                                     &kp LEFT           &kp DOWN           &kp UP             &kp RIGHT          &trans               &trans
     &dt_shift          &bootloader        &sys_reset         &trans             &trans             &trans                                                     &kp HOME           &kp PG_DN          &kp PG_UP          &kp END            &trans               &mt_rsft_ent RSHFT ENTER
-                                                                &to BASE           &trans             &trans                                                     &trans             &trans             &to BASE
+                                                               &to BASE           &trans             &trans                                                     &trans             &trans             &to BASE
             >;
         };
 
@@ -743,9 +1131,18 @@
     &kp TAB                &kp B                  &kp Y                  &kp O                  &kp U                  &kp SQT                                                            &slash_qmark           &kp L                  &kp D                  &kp W                  &kp V                  &kp Z
     &mt_lctl_esc LCTRL ESC &hml LGUI C            &hml LALT I            &hml LCTRL E           &hml LSHFT A           &comma_semi                                                        &dot_colon             &hmr RSHFT H           &hmr RCTRL T           &hmr RALT S            &hmr RGUI N            &kp Q
     &dt_shift              &kp G                  &kp X                  &kp J                  &kp K                  &excl_pipe                                                         &kp SEMI               &kp R                  &kp M                  &kp F                  &kp P                  &mt_rsft_ent RSHFT ENTER
-                                                                            &to BASE           &smart_layer LOWER SPACE &kp LGUI                                                         &kp RALT               &smart_layer SYMB BSPC   &trans
+                                                                           &to BASE           &smart_layer LOWER SPACE &kp LGUI                                                         &kp RALT               &smart_layer SYMB BSPC
             >;
         };
 
+        // Gaming layer
+        GAMING {
+            bindings = <
+    &kp TAB            &kp Q              &kp W              &kp E              &kp R              &kp T                                                      &kp Y              &kp U              &kp I              &kp O              &kp P                &kp LBKT
+    &kp ESC            &hml LGUI A        &hml LALT S        &hml LCTRL D       &hml LSHFT F       &kp G                                                      &kp H              &hmr RSHFT J       &hmr RCTRL K       &hmr RALT L        &hmr RGUI SEMI       &kp SQT
+    &dt_shift          &kp Z              &kp X              &kp C              &kp V              &kp B                                                      &kp N              &kp M              &comma_semi        &dot_colon         &kp FSLH             &mt_rsft_ent RSHFT ENTER
+                                                               &to BASE           &kp SPACE          &kp LCTRL                                                  &kp RALT           &kp BSPC
+            >;
+        };
     };
 };
