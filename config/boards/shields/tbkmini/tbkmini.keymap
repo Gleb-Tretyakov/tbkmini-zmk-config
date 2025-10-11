@@ -15,7 +15,7 @@
 #define NAV 3
 #define ADJUST 4
 #define COLEMAK_DH 5
-#define GAMING 6
+#define COLEMAK_DH 5
 
 // Optimized global settings
 &lt {
@@ -107,7 +107,7 @@
             compatible = "zmk,behavior-tap-dance";
             #binding-cells = <0>;
             tapping-term-ms = <250>;
-            bindings = <&lang_switch>, <&to COLEMAK_DH>, <&to GAMING>;
+            bindings = <&lang_switch>, <&to COLEMAK_DH>;
         };
         
         dt_shift: dt_shift {
@@ -690,78 +690,62 @@
         // Base layer (QWERTY)
         BASE {
             bindings = <
-    &kp GRAVE          &kp N1             &kp N2             &kp N3             &kp N4             &kp N5                                                     &kp N6             &kp N7             &kp N8             &kp N9             &kp N0               &lock_screen
     &kp TAB            &kp Q              &kp W              &kp E              &kp R              &kp T                                                      &kp Y              &kp U              &kp I              &kp O              &kp P                &kp LBKT
     &mt_lctl_esc LCTRL ESC  &hml LGUI A   &hml LALT S        &hml LCTRL D       &hml LSHFT F       &kp G                                                      &kp H              &hmr RSHFT J       &hmr RCTRL K       &hmr RALT L        &hmr RGUI SEMI       &kp SQT
     &dt_shift          &kp Z              &kp X              &kp C              &kp V              &kp B                                                      &kp N              &kp M              &comma_semi        &dot_colon         &kp FSLH             &mt_rsft_ent RSHFT ENTER
-                                                               &dt_lang               &smart_layer LOWER SPACE &kp LGUI                                              &kp RALT           &smart_layer SYMB BSPC
+                                                                &dt_lang               &smart_layer LOWER SPACE &kp LGUI                                              &kp RALT           &smart_layer SYMB BSPC   &trans
             >;
         };
 
         // Numbers, F-keys and math
         LOWER {
             bindings = <
-    &kp F1             &kp F2             &kp F3             &kp F4             &kp F5             &kp F6                                                     &kp F7             &kp F8             &kp F9             &kp F10            &kp F11              &kp F12
     &kp GRAVE          &kp N1             &kp N2             &kp N3             &kp N4             &kp N5                                                     &kp N6             &kp N7             &kp N8             &kp N9             &kp N0               &kp STAR
     &mt_lctl_esc LCTRL ESC &hml LGUI AMPS     &hml LALT LPAR     &hml LCTRL RPAR    &hml LSHFT UNDER   &kp MINUS                                                  &kp EQUAL          &hmr RSHFT N4      &hmr RCTRL N5      &hmr RALT N6       &hmr RGUI DOT        &kp FSLH
     &bootloader        &kp PIPE           &kp LBKT           &kp RBKT           &kp LBRC           &kp RBRC                                                   &kp N0             &kp N1             &kp N2             &kp N3             &kp COMMA            &mt_rsft_ent RSHFT ENTER
-                                                               &trans             &trans             &trans                                                     &trans             &kp DEL
+                                                                &trans             &trans             &trans                                                     &trans             &kp DEL   &trans
             >;
         };
 
         // Symbols and special keys
         SYMB {
             bindings = <
-    &trans             &trans             &trans             &trans             &trans             &trans                                                     &kp N1             &kp N2             &kp N3             &kp N4             &kp N5               &trans
     &kp LS(NONUS_BSLH)          &kp EXCL           &kp LT             &kp GT             &kp GRAVE          &kp PIPE                                                   &kp AMPS        &kp UNDER          &kp LBKT           &kp RBKT           &kp PRCNT            &kp AMPS
     &mt_lctl_esc LCTRL ESC &hml LGUI AT       &hml LALT MINUS    &hml LCTRL PLUS    &hml LSHFT EQUAL   &kp HASH                                                   &kp PIPE        &hmr RSHFT COLON   &hmr RCTRL LPAR    &hmr RALT RPAR     &hmr RGUI QMARK      &kp SQT
     &dt_shift          &kp CARET          &kp FSLH           &kp STAR           &kp BSLH           &none                                                      &kp LS(NONUS_BSLH)       &kp DLLR           &kp LBRC           &kp RBRC           &kp AT               &mt_rsft_ent RSHFT ENTER
-                                                               &trans             &kp SPACE          &trans                                                     &trans             &trans
+                                                                &trans             &kp SPACE          &trans                                                     &trans             &trans   &trans
             >;
         };
 
         // Navigation, multimedia and system functions
         NAV {
             bindings = <
-    &trans             &kp C_PREV           &kp C_PP             &kp C_NEXT        &kp C_VOL_UP    &kp C_VOL_DN                                                 &bt BT_CLR         &bootloader          &trans             &trans             &sys_reset               &trans
     &kp LA(TAB)        &kp LG(TAB)          &trans               &trans       &kp LG(LS(TAB))     &screenshot                                                &kp PG_UP          &win_left          &kp UP             &win_right         &win_max             &trans
     &mt_lctl_esc LCTRL ESC &hml LGUI HOME     &hml LALT PG_DN    &hml LCTRL PG_UP   &hml LSHFT END     &trans                                               &kp PG_DN          &hmr RSHFT LEFT    &hmr RCTRL DOWN    &hmr RALT RIGHT    &hmr RGUI HOME       &trans
     &dt_shift          &prev_desktop      &vim_save         &select_word       &next_desktop      &prev_desktop                                              &select_line       &kp HOME           &kp END            &kp INS            &kp DEL              &mt_rsft_ent RSHFT ENTER
-                                                               &trans             &trans             &trans                                                     &trans             &kp C_MUTE
+                                                                &trans             &trans             &trans                                                     &trans             &kp C_MUTE   &trans
             >;
         };
 
         // Settings, Bluetooth and debug
         ADJUST {
             bindings = <
-    &trans             &bt BT_SEL 0       &bt BT_SEL 1       &bt BT_SEL 2       &bt BT_SEL 3       &bt BT_SEL 4                                               &trans             &trans             &trans             &trans             &trans               &trans
     &trans             &bt BT_CLR         &trans             &trans             &trans             &out OUT_TOG                                               &trans             &kp C_VOL_UP       &kp C_MUTE         &kp C_VOL_DN       &trans               &trans
     &mt_lctl_esc LCTRL ESC &trans             &trans             &trans             &trans             &trans                                                     &kp LEFT           &kp DOWN           &kp UP             &kp RIGHT          &trans               &trans
     &dt_shift          &bootloader        &sys_reset         &trans             &trans             &trans                                                     &kp HOME           &kp PG_DN          &kp PG_UP          &kp END            &trans               &mt_rsft_ent RSHFT ENTER
-                                                               &to BASE           &trans             &trans                                                     &trans             &trans             &to BASE
+                                                                &to BASE           &trans             &trans                                                     &trans             &trans             &to BASE
             >;
         };
 
         // Colemak-DH layer
         COLEMAK_DH {
             bindings = <
-    &kp GRAVE              &kp N1                 &kp N2                 &kp N3                 &kp N4                 &kp N5                                                             &kp N6                 &kp N7                 &kp N8                 &kp N9                 &kp N0                 &lock_screen
     &kp TAB                &kp B                  &kp Y                  &kp O                  &kp U                  &kp SQT                                                            &slash_qmark           &kp L                  &kp D                  &kp W                  &kp V                  &kp Z
     &mt_lctl_esc LCTRL ESC &hml LGUI C            &hml LALT I            &hml LCTRL E           &hml LSHFT A           &comma_semi                                                        &dot_colon             &hmr RSHFT H           &hmr RCTRL T           &hmr RALT S            &hmr RGUI N            &kp Q
     &dt_shift              &kp G                  &kp X                  &kp J                  &kp K                  &excl_pipe                                                         &kp SEMI               &kp R                  &kp M                  &kp F                  &kp P                  &mt_rsft_ent RSHFT ENTER
-                                                                           &to BASE           &smart_layer LOWER SPACE &kp LGUI                                                         &kp RALT               &smart_layer SYMB BSPC
+                                                                            &to BASE           &smart_layer LOWER SPACE &kp LGUI                                                         &kp RALT               &smart_layer SYMB BSPC   &trans
             >;
         };
 
-        // Gaming layer
-        GAMING {
-            bindings = <
-    &kp GRAVE          &kp N1             &kp N2             &kp N3             &kp N4             &kp N5                                                     &kp N6             &kp N7             &kp N8             &kp N9             &kp N0               &lock_screen
-    &kp TAB            &kp Q              &kp W              &kp E              &kp R              &kp T                                                      &kp Y              &kp U              &kp I              &kp O              &kp P                &kp LBKT
-    &kp ESC            &hml LGUI A        &hml LALT S        &hml LCTRL D       &hml LSHFT F       &kp G                                                      &kp H              &hmr RSHFT J       &hmr RCTRL K       &hmr RALT L        &hmr RGUI SEMI       &kp SQT
-    &dt_shift          &kp Z              &kp X              &kp C              &kp V              &kp B                                                      &kp N              &kp M              &comma_semi        &dot_colon         &kp FSLH             &mt_rsft_ent RSHFT ENTER
-                                                               &to BASE           &kp SPACE          &kp LCTRL                                                  &kp RALT           &kp BSPC
-            >;
-        };
     };
 };
