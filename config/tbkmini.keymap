@@ -126,35 +126,35 @@
         combo_cut {
             timeout-ms = <40>;
             key-positions = <10 11>;  // Adapted for 3x6 matrix
-            bindings = <&kp LC(X)>;
+            bindings = <&kp LC(KC_X)>;
             layers = <BASE>;
         };
         
         combo_copy {
             timeout-ms = <40>;
             key-positions = <11 12>;  // Adapted for 3x6 matrix
-            bindings = <&kp LC(C)>;
+            bindings = <&kp LC(KC_C)>;
             layers = <BASE>;
         };
         
         combo_paste {
             timeout-ms = <40>;
             key-positions = <12 13>;  // Adapted for 3x6 matrix
-            bindings = <&kp LC(V)>;
+            bindings = <&kp LC(KC_V)>;
             layers = <BASE>;
         };
         
         combo_undo {
             timeout-ms = <40>;
             key-positions = <9 11>;  // Adapted for 3x6 matrix
-            bindings = <&kp LC(Z)>;
+            bindings = <&kp LC(KC_Z)>;
             layers = <BASE>;
         };
         
         combo_redo {
             timeout-ms = <40>;
             key-positions = <9 12>;  // Adapted for 3x6 matrix
-            bindings = <&kp LC(LS(Z))>;
+            bindings = <&kp LC(LS(KC_Z))>;
             layers = <BASE>;
         };
         
@@ -1098,9 +1098,9 @@
         // Symbols and special keys
         SYMB {
             bindings = <
-    &kp LS(NONUS_BSLH)          &kp EXCL           &kp LT             &kp GT             &kp GRAVE          &kp PIPE                                                   &kp AMPS        &kp UNDER          &kp LBKT           &kp RBKT           &kp PRCNT            &kp AMPS
+    &kp LS(KC_NONUS_BSLH)      &kp EXCL           &kp LT             &kp GT             &kp GRAVE          &kp PIPE                                                   &kp AMPS        &kp UNDER          &kp LBKT           &kp RBKT           &kp PRCNT            &kp AMPS
     &mt_lctl_esc LCTRL ESC &hml LGUI AT       &hml LALT MINUS    &hml LCTRL PLUS    &hml LSHFT EQUAL   &kp HASH                                                   &kp PIPE        &hmr RSHFT COLON   &hmr RCTRL LPAR    &hmr RALT RPAR     &hmr RGUI QMARK      &kp SQT
-    &dt_shift          &kp CARET          &kp FSLH           &kp STAR           &kp BSLH           &none                                                      &kp LS(NONUS_BSLH)       &kp DLLR           &kp LBRC           &kp RBRC           &kp AT               &mt_rsft_ent RSHFT ENTER
+    &dt_shift          &kp CARET          &kp FSLH           &kp STAR           &kp BSLH           &none                                                      &kp LS(KC_NONUS_BSLH)   &kp DLLR           &kp LBRC           &kp RBRC           &kp AT               &mt_rsft_ent RSHFT ENTER
                                                                &trans             &kp SPACE          &trans                                                     &trans             &trans
             >;
         };
@@ -1108,7 +1108,7 @@
         // Navigation, multimedia and system functions
         NAV {
             bindings = <
-    &kp LA(TAB)        &kp LG(TAB)          &trans               &trans       &kp LG(LS(TAB))     &screenshot                                                &kp PG_UP          &win_left          &kp UP             &win_right         &win_max             &trans
+    &kp LA(KC_TAB)     &kp LG(KC_TAB)       &trans               &trans       &kp LG(LS(KC_TAB))  &screenshot                                                &kp PG_UP          &win_left          &kp UP             &win_right         &win_max             &trans
     &mt_lctl_esc LCTRL ESC &hml LGUI HOME     &hml LALT PG_DN    &hml LCTRL PG_UP   &hml LSHFT END     &trans                                               &kp PG_DN          &hmr RSHFT LEFT    &hmr RCTRL DOWN    &hmr RALT RIGHT    &hmr RGUI HOME       &trans
     &dt_shift          &prev_desktop      &vim_save         &select_word       &next_desktop      &prev_desktop                                              &select_line       &kp HOME           &kp END            &kp INS            &kp DEL              &mt_rsft_ent RSHFT ENTER
                                                                &trans             &trans             &trans                                                     &trans             &kp C_MUTE
